@@ -5,6 +5,7 @@ class AppColors {
   Color get yellowAlert => const Color(0xFFFFBA08);
   Color get greenSuccess => const Color(0xFF118708);
   Color get blueInfo => const Color(0xFF4393EF);
+  Color get white => const Color(0xFFFFFFFF);
 
 // Tema Light
   Color get lightPrimaryColor =>
