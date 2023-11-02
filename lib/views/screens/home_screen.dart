@@ -1,14 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:provider/provider.dart';
 import 'package:vibraguard/core/helpers/resources.dart';
 import 'package:vibraguard/model/assets/asset_model.dart';
 import 'package:vibraguard/viewmodel/assets_view_model.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   final int id;
 
   const HomeScreen({super.key, required this.id});
 
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+
+  void dispose() {
+    // FlutterNativeSplash.remove();
+  }
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

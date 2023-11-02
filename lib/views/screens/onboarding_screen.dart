@@ -1,3 +1,4 @@
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:vibraguard/core/formaters/captalizer_test_formater.dart';
 import 'package:vibraguard/core/formaters/uppercase_text_formater.dart';
 import 'package:vibraguard/core/helpers/images/image_paths.dart';
@@ -33,7 +34,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   @override
   void dispose() {
     _model.dispose();
-
+    // FlutterNativeSplash.remove();
     super.dispose();
   }
 
