@@ -1,8 +1,12 @@
+// ignore_for_file: unused_import
+
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:vibraguard/core/formaters/captalizer_test_formater.dart';
 import 'package:vibraguard/core/formaters/uppercase_text_formater.dart';
 import 'package:vibraguard/core/helpers/images/image_paths.dart';
 import 'package:vibraguard/views/screens/home_screen.dart';
+import 'package:vibraguard/views/screens/test_screen.dart';
+import 'package:vibraguard/views/shared/components/button_primary.dart';
 import '../../core/helpers/resources.dart';
 import '../../model/onboarding/onboarding_model.dart';
 import 'package:flutter/material.dart';
@@ -135,7 +139,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 ),
                 Padding(
                   padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 36),
-                  child: TextButton(
+                  child: ButtonPrimary(
                     onPressed: () async {
                       if (Navigator.of(context).canPop()) {
                         Navigator.pop(context);
@@ -143,30 +147,16 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (c) {
-                            return const HomeScreen(
-                              id: 1,
-                            );
+                            // return const HomeScreen(
+                            //   id: 1,
+                            // );
+                            return const TestScreen();
                           },
                         ),
                       );
                     },
-                    style: TextButton.styleFrom(
-                      foregroundColor: Colors.white,
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 16.0,
-                        horizontal: 140.0,
-                      ),
-                      backgroundColor: R.colors.darkPrimaryButtonColor,
-                    ),
-                    child: Text(
-                      CapitalizerTextFormatter.capitalizeFirstLetter(
-                          R.string.toStart),
-                      style: TextStyle(
-                        color: R.colors.white,
-                        fontSize: R.fontSize.fs14,
-                        fontFamily: R.fontFamily.secondaryFont,
-                        fontWeight: R.fontWeight.medium,
-                      ),
+                    title: CapitalizerTextFormatter.capitalizeFirstLetter(
+                      R.string.toStart,
                     ),
                   ),
                 ),

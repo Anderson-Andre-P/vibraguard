@@ -23,25 +23,30 @@ class ButtonPrimary extends StatelessWidget {
     this.buttonColor,
     this.textColor,
     this.borderColor,
-    this.height = 52,
-    this.textSize = 16,
+    this.height = 40,
+    this.textSize = 14,
     @required this.onPressed,
     this.width,
     this.radius,
     this.padding,
-    this.elevation = 2,
+    this.elevation = 1,
   });
 
   @override
   Widget build(BuildContext context) {
     final buttonTextTheme = TextStyle(
-      fontSize: textSize!,
-      color: textColor ?? R.colors.lightPrimaryBackgroundColor,
-      fontWeight: FontWeight.w700,
+      color: R.colors.white,
+      fontSize: R.fontSize.fs14,
+      fontFamily: R.fontFamily.secondaryFont,
+      fontWeight: R.fontWeight.medium,
     );
 
     return Padding(
-      padding: padding ?? EdgeInsets.zero,
+      padding: padding ??
+          const EdgeInsets.symmetric(
+            vertical: 16.0,
+            horizontal: 24.0,
+          ),
       child: SizedBox(
         width: width ?? MediaQuery.of(context).size.width,
         height: height!,
@@ -49,8 +54,9 @@ class ButtonPrimary extends StatelessWidget {
           elevation: elevation,
           disabledColor: R.colors.lightDisabledInputColor,
           shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(radius ?? 0),
-              side: BorderSide(color: borderColor ?? Colors.transparent)),
+            borderRadius: BorderRadius.circular(radius ?? 8),
+            side: BorderSide(color: borderColor ?? Colors.transparent),
+          ),
           color: buttonColor ?? R.colors.lightPrimaryButtonColor,
           onPressed: onPressed,
           child: icon != null

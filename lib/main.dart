@@ -1,4 +1,4 @@
-// ignore_for_file: use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously, unused_local_variable, unused_import
 
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
@@ -7,6 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vibraguard/viewmodel/assets_view_model.dart';
 import 'package:vibraguard/views/screens/home_screen.dart';
 import 'package:vibraguard/views/screens/onboarding_screen.dart';
+import 'package:vibraguard/views/screens/test_screen.dart';
 
 void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
@@ -34,7 +35,11 @@ void main() async {
         // ),
       ],
       child: MaterialApp(
-        home: isFirstOpen ? const OnboardingScreen() : const MainApp(),
+        home: isFirstOpen
+            ? const OnboardingScreen()
+            : const HomeScreen(
+                id: 1,
+              ),
       ),
     ),
   );
@@ -45,6 +50,8 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const HomeScreen(id: 1);
+    return const HomeScreen(
+      id: 1,
+    );
   }
 }

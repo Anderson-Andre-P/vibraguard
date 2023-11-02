@@ -1,9 +1,13 @@
+// ignore_for_file: unused_import
+
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:provider/provider.dart';
+import 'package:vibraguard/core/formaters/captalizer_test_formater.dart';
 import 'package:vibraguard/core/helpers/resources.dart';
 import 'package:vibraguard/model/assets/asset_model.dart';
 import 'package:vibraguard/viewmodel/assets_view_model.dart';
+import 'package:vibraguard/views/shared/components/button_primary.dart';
 
 class HomeScreen extends StatefulWidget {
   final int id;
