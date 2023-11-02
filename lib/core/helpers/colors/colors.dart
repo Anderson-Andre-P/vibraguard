@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 
 class AppColors {
   Color get redError => const Color(0xFFEF4352);
+  Color get redErrorBackground => const Color.fromRGBO(239, 67, 82, 0.1);
   Color get yellowAlert => const Color(0xFFFFBA08);
+  Color get yellowAlertBackground => const Color.fromRGBO(255, 186, 8, 0.1);
   Color get greenSuccess => const Color(0xFF118708);
+  Color get greenSuccessBackground => const Color.fromRGBO(17, 135, 8, 0.1);
   Color get blueInfo => const Color(0xFF4393EF);
   Color get white => const Color(0xFFFFFFFF);
 

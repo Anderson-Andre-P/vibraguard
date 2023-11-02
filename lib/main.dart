@@ -77,8 +77,7 @@ class _MainAppState extends State<MainApp> {
 
   void _showOnboardingScreen() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      Navigator.pushReplacement(
-        context,
+      Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (context) {
           return const OnboardingScreen();
         }),

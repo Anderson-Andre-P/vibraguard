@@ -94,12 +94,15 @@ class _HomeScreenState extends State<HomeScreen> {
               return Text(R.string.itemNotFound);
             } else {
               final int length = snapshot.data!;
-              final List<Widget> assetWidgets = [];
-              for (int index = 1; index <= length; index++) {
-                assetWidgets.add(
-                  FutureBuilder<Assets?>(
-                    future:
-                        Provider.of<AssetsViewModel>(context).fetchData(index),
+              return GridView.builder(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2, // Defina o número de colunas aqui
+                ),
+                itemCount: length,
+                itemBuilder: (ctx, index) {
+                  return FutureBuilder<Assets?>(
+                    future: Provider.of<AssetsViewModel>(context)
+                        .fetchData(index + 1),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return const Center(
@@ -108,47 +111,131 @@ class _HomeScreenState extends State<HomeScreen> {
                       } else if (snapshot.hasError) {
                         return Text('Erro: ${snapshot.error}');
                       } else if (snapshot.data == null) {
-                        return Text('Item não encontrado para ID: $index');
+                        return Text(
+                            'Item não encontrado para ID: ${index + 1}');
                       } else {
                         final assets = snapshot.data!;
                         final healthHistories = assets.healthHistory;
 
-                        return Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text('ID: ${assets.id}'),
-                            Image.network("${assets.image}"),
+                        Map<String, Color> statusColorMap = {
+                          'In operation': Colors.green,
+                          'In alert': Colors.blue,
+                          'In downtime': Colors.red,
+                          // Adicione outras associações valor-cor conforme necessário
+                        };
 
-                            if (healthHistories != null)
-                              for (final history in healthHistories)
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text('Status: ${history.status}'),
-                                    Text('Timestamp: ${history.timestamp}'),
-                                  ],
+                        return Card(
+                          margin: const EdgeInsets.all(12.0),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(4),
+                            ),
+                            margin: const EdgeInsets.all(0),
+                            padding: const EdgeInsets.all(0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                SizedBox(
+                                  height: 134.0,
+                                  child: Image.network(
+                                    "${assets.image}",
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
-                            // Outros campos de Assets que você deseja exibir
-                          ],
+                                SizedBox(
+                                  height: 44.0,
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      SizedBox(
+                                        width: 72,
+                                        child: Text(
+                                          '${assets.name}',
+                                          style: TextStyle(
+                                            fontSize: R.fontSize.fs14,
+                                            fontWeight: R.fontWeight.normal,
+                                            fontFamily:
+                                                R.fontFamily.secondaryFont,
+                                            color:
+                                                R.colors.lightCommonTextColor,
+                                          ),
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                          softWrap: false,
+                                        ),
+                                      ),
+                                      Container(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 4.0, horizontal: 8.0),
+                                        decoration: BoxDecoration(
+                                          color: _getStatusColorToBackground(
+                                              '${assets.status}'),
+                                          borderRadius:
+                                              BorderRadius.circular(4.0),
+                                          border: Border.all(
+                                            color: _getStatusColorToText(
+                                                '${assets.status}'), // Cor da borda
+                                            width: 1.0, // Largura da borda
+                                          ),
+                                        ),
+                                        child: Text(
+                                          '${assets.status}',
+                                          style: TextStyle(
+                                            fontSize: R.fontSize.fs12,
+                                            fontWeight: R.fontWeight.normal,
+                                            fontFamily:
+                                                R.fontFamily.secondaryFont,
+                                            color: _getStatusColorToText(
+                                                '${assets.status}'),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
                         );
                       }
                     },
-                  ),
-                );
-                if (index < length) {
-                  assetWidgets.add(
-                    const SizedBox(
-                      height: 16.0,
-                    ),
                   );
-                }
-              }
-              return ListView(children: assetWidgets);
+                },
+              );
             }
           },
         ),
       ),
     );
+  }
+}
+
+Color _getStatusColorToText(String status) {
+  switch (status) {
+    case 'inOperation':
+      return R.colors.greenSuccess;
+    case 'inAlert':
+      return R.colors.yellowAlert;
+    case 'inDowntime':
+      return R.colors.redError;
+    default:
+      return Colors.black;
+  }
+}
+
+Color _getStatusColorToBackground(String status) {
+  switch (status) {
+    case 'inOperation':
+      return R.colors.greenSuccessBackground;
+    case 'inAlert':
+      return R.colors.yellowAlertBackground;
+    case 'inDowntime':
+      return R.colors.redErrorBackground;
+    default:
+      return Colors.black;
   }
 }
 
