@@ -1,19 +1,27 @@
-// ignore_for_file: use_build_context_synchronously, unused_local_variable, unused_import
+// ignore_for_file: use_build_context_synchronously, unused_local_variable, unused_import, library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:vibraguard/core/helpers/resources.dart';
 import 'package:vibraguard/viewmodel/assets_view_model.dart';
 import 'package:vibraguard/views/screens/home_screen.dart';
 import 'package:vibraguard/views/screens/onboarding_screen.dart';
 import 'package:vibraguard/views/screens/test_screen.dart';
+import 'package:vibraguard/views/shared/theme/app_theme.dart';
+import 'package:vibraguard/views/shared/theme/config.dart';
+import 'package:vibraguard/views/shared/theme/theme_mode.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   final prefs = await SharedPreferences.getInstance();
   final bool isFirstOpen = prefs.getBool('firstOpen') ?? true;
   // FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+
+  SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
 
   runApp(
     MultiProvider(
@@ -21,6 +29,7 @@ void main() async {
         ChangeNotifierProvider<AssetsViewModel>(
           create: (_) => AssetsViewModel(),
         ),
+
         // ChangeNotifierProvider<CompaniesViewModel>(
         //   create: (_) => CompaniesViewModel(),
         // ),
@@ -34,24 +43,60 @@ void main() async {
         //   create: (_) => WorkOrdersViewModel(),
         // ),
       ],
-      child: MaterialApp(
-        home: isFirstOpen
-            ? const OnboardingScreen()
-            : const HomeScreen(
-                id: 1,
-              ),
+      child: MainApp(
+        isFirstOpen: isFirstOpen,
+        prefs: prefs,
       ),
     ),
   );
 }
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+class MainApp extends StatefulWidget {
+  final bool isFirstOpen;
+  final SharedPreferences prefs;
+
+  const MainApp({required this.isFirstOpen, required this.prefs, Key? key})
+      : super(key: key);
+
+  @override
+  _MainAppState createState() => _MainAppState();
+}
+
+class _MainAppState extends State<MainApp> {
+  @override
+  void initState() {
+    super.initState();
+    currentTheme.addListener(() {
+      setState(() {});
+    });
+
+    if (widget.isFirstOpen) {
+      _showOnboardingScreen();
+    }
+  }
+
+  void _showOnboardingScreen() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) {
+          return const OnboardingScreen();
+        }),
+      );
+
+      widget.prefs.setBool('firstOpen', false);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return const HomeScreen(
-      id: 1,
+    return MaterialApp(
+      title: R.string.titleOfApp,
+      theme: appThemeLight(),
+      darkTheme: appThemeDark(),
+      themeMode: currentTheme.currentTheme(),
+      debugShowCheckedModeBanner: false,
+      home: const HomeScreen(id: 1),
     );
   }
 }

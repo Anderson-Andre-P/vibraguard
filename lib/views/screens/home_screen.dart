@@ -3,11 +3,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:provider/provider.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 import 'package:vibraguard/core/formaters/captalizer_test_formater.dart';
 import 'package:vibraguard/core/helpers/resources.dart';
 import 'package:vibraguard/model/assets/asset_model.dart';
 import 'package:vibraguard/viewmodel/assets_view_model.dart';
+import 'package:vibraguard/views/screens/qrcode/barcode_scanner_window.dart';
 import 'package:vibraguard/views/shared/components/button_primary.dart';
+import 'package:vibraguard/views/shared/theme/config.dart';
+import 'package:vibraguard/views/shared/theme/theme_mode.dart';
 
 class HomeScreen extends StatefulWidget {
   final int id;
@@ -27,7 +31,53 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(R.string.titleOfApp),
+        backgroundColor: R.colors.lightPrimaryBackgroundColor,
+        elevation: 1,
+        centerTitle: false,
+        title: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Good Morning",
+              style: ThemeData.light().textTheme.bodyLarge,
+            ),
+            Text(
+              "Anderson André",
+              style: ThemeData.light().textTheme.bodyLarge,
+            )
+          ],
+        ),
+        leading: Icon(Icons.account_circle_rounded,
+            color: R.colors.lightIconColor, size: 50.0),
+        actions: [
+          IconButton(
+            onPressed: () => {currentTheme.switchTheme()},
+            icon: Icon(Icons.notifications, color: R.colors.lightIconColor),
+          ),
+          IconButton(
+            onPressed: () {
+              // currentTheme.switchTheme();
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (c) => const BarcodeScannerWithScanWindow(),
+                ),
+              );
+            },
+            icon: Icon(Icons.qr_code_scanner, color: R.colors.lightIconColor),
+          ),
+          // Consumer<Mytheme>(
+          //   builder: (context, themeProvider, child) {
+          //     return IconButton(
+          //       onPressed: () {
+          //         themeProvider.switchTheme();
+          //       },
+          //       icon: Icon(Icons.lightbulb_outline,
+          //           color: R.colors.lightIconColor),
+          //     );
+          //   },
+          // )
+        ],
       ),
       body: ChangeNotifierProvider(
         create: (_) => AssetsViewModel(),

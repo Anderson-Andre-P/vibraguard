@@ -150,7 +150,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             // return const HomeScreen(
                             //   id: 1,
                             // );
-                            return const TestScreen();
+                            return const HomeScreen(
+                              id: 1,
+                            );
                           },
                         ),
                       );
