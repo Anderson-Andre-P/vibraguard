@@ -7,6 +7,8 @@ import 'package:vibraguard/views/screens/assets/asset_detail_screen.dart';
 import 'package:vibraguard/views/screens/qrcode/barcode_scanner_window.dart';
 import 'package:vibraguard/views/shared/theme/config.dart';
 
+import '../../shared/components/status_colors_to_badges.dart';
+
 class AssetsScreen extends StatefulWidget {
   final int id;
 
@@ -165,12 +167,12 @@ class _AssetsScreenState extends State<AssetsScreen> {
                                           padding: const EdgeInsets.symmetric(
                                               vertical: 4.0, horizontal: 8.0),
                                           decoration: BoxDecoration(
-                                            color: _getStatusColorToBackground(
+                                            color: getStatusColorToBackground(
                                                 '${assets.status}'),
                                             borderRadius:
                                                 BorderRadius.circular(4.0),
                                             border: Border.all(
-                                              color: _getStatusColorToText(
+                                              color: getStatusColorToText(
                                                   '${assets.status}'), // Cor da borda
                                               width: 1.0, // Largura da borda
                                             ),
@@ -182,7 +184,7 @@ class _AssetsScreenState extends State<AssetsScreen> {
                                               fontWeight: R.fontWeight.normal,
                                               fontFamily:
                                                   R.fontFamily.secondaryFont,
-                                              color: _getStatusColorToText(
+                                              color: getStatusColorToText(
                                                   '${assets.status}'),
                                             ),
                                           ),
@@ -205,32 +207,6 @@ class _AssetsScreenState extends State<AssetsScreen> {
         ),
       ),
     );
-  }
-}
-
-Color _getStatusColorToText(String status) {
-  switch (status) {
-    case 'inOperation':
-      return R.colors.greenSuccess;
-    case 'inAlert':
-      return R.colors.yellowAlert;
-    case 'inDowntime':
-      return R.colors.redError;
-    default:
-      return Colors.black;
-  }
-}
-
-Color _getStatusColorToBackground(String status) {
-  switch (status) {
-    case 'inOperation':
-      return R.colors.greenSuccessBackground;
-    case 'inAlert':
-      return R.colors.yellowAlertBackground;
-    case 'inDowntime':
-      return R.colors.redErrorBackground;
-    default:
-      return Colors.black;
   }
 }
 
