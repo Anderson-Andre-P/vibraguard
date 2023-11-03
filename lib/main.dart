@@ -9,6 +9,7 @@ import 'package:vibraguard/core/helpers/resources.dart';
 import 'package:vibraguard/viewmodel/assets_view_model.dart';
 import 'package:vibraguard/views/screens/home_screen.dart';
 import 'package:vibraguard/views/screens/onboarding_screen.dart';
+import 'package:vibraguard/views/screens/sign_in_screen.dart';
 import 'package:vibraguard/views/screens/test_screen.dart';
 import 'package:vibraguard/views/shared/theme/app_theme.dart';
 import 'package:vibraguard/views/shared/theme/config.dart';
@@ -95,7 +96,7 @@ class _MainAppState extends State<MainApp> {
       darkTheme: appThemeDark(),
       themeMode: currentTheme.currentTheme(),
       debugShowCheckedModeBanner: false,
-      home: const HomeScreen(id: 1),
+      home: const SignIn(),
     );
   }
 }

@@ -8,6 +8,7 @@ import 'package:vibraguard/core/formaters/captalizer_test_formater.dart';
 import 'package:vibraguard/core/helpers/resources.dart';
 import 'package:vibraguard/model/assets/asset_model.dart';
 import 'package:vibraguard/viewmodel/assets_view_model.dart';
+import 'package:vibraguard/views/screens/assets/asset_detail_screen.dart';
 import 'package:vibraguard/views/screens/qrcode/barcode_scanner_window.dart';
 import 'package:vibraguard/views/shared/components/button_primary.dart';
 import 'package:vibraguard/views/shared/theme/config.dart';
@@ -111,92 +112,93 @@ class _HomeScreenState extends State<HomeScreen> {
                       } else if (snapshot.hasError) {
                         return Text('Erro: ${snapshot.error}');
                       } else if (snapshot.data == null) {
-                        return Text(
-                            'Item não encontrado para ID: ${index + 1}');
+                        return Text('Item não encontrado para ID: $index');
                       } else {
                         final assets = snapshot.data!;
-                        final healthHistories = assets.healthHistory;
 
-                        Map<String, Color> statusColorMap = {
-                          'In operation': Colors.green,
-                          'In alert': Colors.blue,
-                          'In downtime': Colors.red,
-                          // Adicione outras associações valor-cor conforme necessário
-                        };
-
-                        return Card(
-                          margin: const EdgeInsets.all(12.0),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(4),
-                            ),
-                            margin: const EdgeInsets.all(0),
-                            padding: const EdgeInsets.all(0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                SizedBox(
-                                  height: 134.0,
-                                  child: Image.network(
-                                    "${assets.image}",
-                                    fit: BoxFit.cover,
+                        return GestureDetector(
+                          onTap: () {
+                            // Navegue para a tela detalhada com base no ID do ativo
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (c) => AssetDetailScreen(id: index),
+                              ),
+                            );
+                          },
+                          child: Card(
+                            margin: const EdgeInsets.all(12.0),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(4),
+                              ),
+                              margin: const EdgeInsets.all(0),
+                              padding: const EdgeInsets.all(0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                children: [
+                                  SizedBox(
+                                    height: 134.0,
+                                    child: Image.network(
+                                      "${assets.image}",
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
-                                ),
-                                SizedBox(
-                                  height: 44.0,
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      SizedBox(
-                                        width: 72,
-                                        child: Text(
-                                          '${assets.name}',
-                                          style: TextStyle(
-                                            fontSize: R.fontSize.fs14,
-                                            fontWeight: R.fontWeight.normal,
-                                            fontFamily:
-                                                R.fontFamily.secondaryFont,
-                                            color:
-                                                R.colors.lightCommonTextColor,
-                                          ),
-                                          maxLines: 1,
-                                          overflow: TextOverflow.ellipsis,
-                                          softWrap: false,
-                                        ),
-                                      ),
-                                      Container(
-                                        padding: const EdgeInsets.symmetric(
-                                            vertical: 4.0, horizontal: 8.0),
-                                        decoration: BoxDecoration(
-                                          color: _getStatusColorToBackground(
-                                              '${assets.status}'),
-                                          borderRadius:
-                                              BorderRadius.circular(4.0),
-                                          border: Border.all(
-                                            color: _getStatusColorToText(
-                                                '${assets.status}'), // Cor da borda
-                                            width: 1.0, // Largura da borda
+                                  SizedBox(
+                                    height: 44.0,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        SizedBox(
+                                          width: 72,
+                                          child: Text(
+                                            '${assets.name}',
+                                            style: TextStyle(
+                                              fontSize: R.fontSize.fs14,
+                                              fontWeight: R.fontWeight.normal,
+                                              fontFamily:
+                                                  R.fontFamily.secondaryFont,
+                                              color:
+                                                  R.colors.lightCommonTextColor,
+                                            ),
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                            softWrap: false,
                                           ),
                                         ),
-                                        child: Text(
-                                          '${assets.status}',
-                                          style: TextStyle(
-                                            fontSize: R.fontSize.fs12,
-                                            fontWeight: R.fontWeight.normal,
-                                            fontFamily:
-                                                R.fontFamily.secondaryFont,
-                                            color: _getStatusColorToText(
+                                        Container(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 4.0, horizontal: 8.0),
+                                          decoration: BoxDecoration(
+                                            color: _getStatusColorToBackground(
                                                 '${assets.status}'),
+                                            borderRadius:
+                                                BorderRadius.circular(4.0),
+                                            border: Border.all(
+                                              color: _getStatusColorToText(
+                                                  '${assets.status}'), // Cor da borda
+                                              width: 1.0, // Largura da borda
+                                            ),
+                                          ),
+                                          child: Text(
+                                            '${assets.status}',
+                                            style: TextStyle(
+                                              fontSize: R.fontSize.fs12,
+                                              fontWeight: R.fontWeight.normal,
+                                              fontFamily:
+                                                  R.fontFamily.secondaryFont,
+                                              color: _getStatusColorToText(
+                                                  '${assets.status}'),
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                         );
