@@ -89,7 +89,7 @@ class _MainAppState extends State<MainApp> {
     return MaterialApp(
       title: R.string.titleOfApp,
       theme: appThemeLight(),
-      darkTheme: appThemeDark(),
+      darkTheme: appThemeLight(),
       themeMode: currentTheme.currentTheme(),
       debugShowCheckedModeBanner: false,
       home: const Navigation(),

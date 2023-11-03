@@ -7,7 +7,8 @@ class AppColors {
   Color get yellowAlertBackground => const Color.fromRGBO(255, 186, 8, 0.1);
   Color get greenSuccess => const Color(0xFF118708);
   Color get greenSuccessBackground => const Color.fromRGBO(17, 135, 8, 0.1);
-  Color get blueInfo => const Color(0xFF4393EF);
+  Color get blueInfo => const Color.fromRGBO(67, 147, 239, 1);
+  Color get blueInfoBackground => const Color.fromRGBO(67, 147, 239, 0.1);
   Color get white => const Color(0xFFFFFFFF);
 
 // Tema Light

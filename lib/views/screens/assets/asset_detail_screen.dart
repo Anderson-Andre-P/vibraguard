@@ -1,14 +1,16 @@
-// ignore_for_file: unused_local_variable
+// ignore_for_file: unused_local_variable, prefer_interpolation_to_compose_strings
 
 import 'package:accordion/accordion.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:vibraguard/core/helpers/resources.dart';
 import 'package:vibraguard/model/assets/asset_model.dart';
+import 'package:vibraguard/model/assets/health_history_model.dart';
 import 'package:vibraguard/views/screens/assets/assets_screen.dart';
-
 import '../../../core/formaters/date_time_formater.dart';
 import '../../../core/formaters/decimal_formater.dart';
+import '../../../core/formaters/time_stamp_formater.dart';
 import '../../../viewmodel/assets_view_model.dart';
 import '../../shared/components/status_colors_to_badges.dart';
 
@@ -20,6 +22,39 @@ class AssetDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final assetsModel = Provider.of<AssetsViewModel>(context);
+
+    List<ChartData> getGraphicData(List<HealthHistory> assetsHealthyHistory) {
+      List<ChartData> chartData = [];
+
+      for (var healthyHistory in assetsHealthyHistory) {
+        String status = healthyHistory.status!;
+        Color color;
+        double index;
+
+        String time = formatTimestamp(healthyHistory.timestamp!);
+
+        if (status == 'inAlert') {
+          color = R.colors.lightCommonTextColor;
+          index = 4;
+        } else if (status == 'unplannedStop') {
+          color = R.colors.lightCommonTextColor;
+          index = 3;
+        } else if (status == 'inOperation') {
+          color = R.colors.lightCommonTextColor;
+          index = 2;
+        } else if (status == 'inDowntime') {
+          color = R.colors.lightCommonTextColor;
+          index = 1;
+        } else {
+          color = R.colors.lightCommonTextColor;
+          index = 0;
+        }
+        color = R.colors.lightPrimaryColor;
+
+        chartData.add(ChartData(time, index, color));
+      }
+      return chartData;
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -73,6 +108,7 @@ class AssetDetailScreen extends StatelessWidget {
                   final assets = snapshot.data!;
                   var assetsSensors = assets.sensors;
                   var assetsMetrics = assets.metrics;
+                  var assetsHealthyHistory = assets.healthHistory;
                   return SingleChildScrollView(
                     child: Padding(
                       padding: const EdgeInsets.all(24.0),
@@ -160,7 +196,14 @@ class AssetDetailScreen extends StatelessWidget {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       const Text("Model"),
-                                      Text("${assets.model}"),
+                                      Text(
+                                        "${assets.model}",
+                                        style: TextStyle(
+                                          color: R.colors.lightTitleTextColor,
+                                          fontSize: R.fontSize.fs16,
+                                          fontFamily: R.fontFamily.primaryFont,
+                                        ),
+                                      ),
                                     ],
                                   ),
                                 ),
@@ -334,6 +377,80 @@ class AssetDetailScreen extends StatelessWidget {
                                 const SizedBox(
                                   height: 16.0,
                                 ),
+                                Container(
+                                  decoration: BoxDecoration(
+                                    color: R.colors.lightPrimaryBackgroundColor,
+                                    borderRadius: BorderRadius.circular(4.0),
+                                  ),
+                                  padding: const EdgeInsets.only(
+                                    top: 16.0,
+                                    bottom: 0,
+                                    right: 16.0,
+                                    left: 16.0,
+                                  ),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "Health history",
+                                        style: TextStyle(
+                                          color: R.colors.lightTitleTextColor,
+                                          fontSize: R.fontSize.fs16,
+                                          fontFamily: R.fontFamily.primaryFont,
+                                        ),
+                                      ),
+                                      SfCartesianChart(
+                                        isTransposed: false,
+                                        backgroundColor: R
+                                            .colors.lightPrimaryBackgroundColor,
+                                        primaryXAxis: CategoryAxis(
+                                          majorGridLines: const MajorGridLines(
+                                            width: 0,
+                                          ),
+                                          labelStyle: TextStyle(
+                                            color:
+                                                R.colors.lightCommonTextColor,
+                                            fontWeight: R.fontWeight.normal,
+                                          ),
+                                          borderColor:
+                                              R.colors.lightCommonTextColor,
+                                          minimum: 0,
+                                          maximum: 4.1,
+                                        ),
+                                        primaryYAxis: NumericAxis(
+                                          majorGridLines: const MajorGridLines(
+                                            width: 1,
+                                            dashArray: <double>[5, 5],
+                                          ),
+                                          maximum: 4.1,
+                                          minimum: 0,
+                                          interval: 1,
+                                          axisLabelFormatter:
+                                              (axisLabelRenderArgs) {
+                                            axisLabelRenderArgs.value;
+                                            return getYValueToChart(
+                                                axisLabelRenderArgs.value);
+                                          },
+                                        ),
+                                        series: <ChartSeries>[
+                                          SplineSeries<ChartData, String>(
+                                              width: 3,
+                                              color: R.colors.lightPrimaryColor,
+                                              dataSource: getGraphicData(
+                                                  assetsHealthyHistory!),
+                                              pointColorMapper:
+                                                  (ChartData data, _) =>
+                                                      data.color,
+                                              xValueMapper:
+                                                  (ChartData data, _) => data.x,
+                                              yValueMapper:
+                                                  (ChartData data, _) => data.y)
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
                               ],
                             ),
                           )
@@ -349,4 +466,42 @@ class AssetDetailScreen extends StatelessWidget {
       ),
     );
   }
+
+  getYValueToChart(value) {
+    var textSize = 16.0;
+
+    if (value == 4) {
+      return ChartAxisLabel(
+          'In Alert',
+          TextStyle(
+              color: R.colors.lightCommonTextColor, fontSize: R.fontSize.fs10));
+    } else if (value == 3) {
+      return ChartAxisLabel(
+          'Unplanned Stop',
+          TextStyle(
+              color: R.colors.lightCommonTextColor, fontSize: R.fontSize.fs10));
+    } else if (value == 2) {
+      return ChartAxisLabel(
+          'In Operation',
+          TextStyle(
+              color: R.colors.lightCommonTextColor, fontSize: R.fontSize.fs10));
+    } else if (value == 1) {
+      return ChartAxisLabel(
+          'In Downtime',
+          TextStyle(
+              color: R.colors.lightCommonTextColor, fontSize: R.fontSize.fs10));
+    } else {
+      return ChartAxisLabel(
+          'Offline',
+          TextStyle(
+              color: R.colors.lightCommonTextColor, fontSize: R.fontSize.fs10));
+    }
+  }
+}
+
+class ChartData {
+  ChartData(this.x, this.y, this.color);
+  final String x;
+  final double y;
+  final Color color;
 }

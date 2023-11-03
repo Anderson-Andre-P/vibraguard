@@ -28,6 +28,7 @@ dependencies:
   mobile_scanner: ^3.5.2
   accordion: ^2.6.0
   intl: ^0.18.1
+  syncfusion_flutter_charts: ^23.1.43
 
 dev_dependencies:
   flutter_test:
