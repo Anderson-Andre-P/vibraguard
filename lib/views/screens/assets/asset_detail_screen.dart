@@ -1,8 +1,10 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:vibraguard/core/helpers/resources.dart';
 import 'package:vibraguard/model/assets/asset_model.dart';
-import 'package:vibraguard/views/screens/home_screen.dart';
+import 'package:vibraguard/views/screens/assets/assets_screen.dart';
 
 import '../../../viewmodel/assets_view_model.dart';
 

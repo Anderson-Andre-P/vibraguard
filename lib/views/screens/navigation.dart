@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:vibraguard/core/helpers/resources.dart';
-import 'package:vibraguard/views/screens/home_screen.dart';
+import 'package:vibraguard/views/screens/assets/assets_screen.dart';
 
 class Navigation extends StatefulWidget {
   const Navigation({super.key});
@@ -14,10 +14,10 @@ class _NavigationState extends State<Navigation> {
   int _selectedIndex = 0;
 
   static const List<Widget> _widgetOptions = <Widget>[
-    HomeScreen(
+    AssetsScreen(
       id: 1,
     ),
-    HomeScreen(
+    AssetsScreen(
       id: 1,
     ),
   ];

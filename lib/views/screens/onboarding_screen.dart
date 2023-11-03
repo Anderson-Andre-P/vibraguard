@@ -1,11 +1,7 @@
-// ignore_for_file: unused_import
-
-import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:vibraguard/core/formaters/captalizer_test_formater.dart';
 import 'package:vibraguard/core/formaters/uppercase_text_formater.dart';
 import 'package:vibraguard/core/helpers/images/image_paths.dart';
-import 'package:vibraguard/views/screens/home_screen.dart';
-import 'package:vibraguard/views/screens/test_screen.dart';
+import 'package:vibraguard/views/screens/assets/assets_screen.dart';
 import 'package:vibraguard/views/shared/components/button_primary.dart';
 import '../../core/helpers/resources.dart';
 import '../../model/onboarding/onboarding_model.dart';
@@ -150,7 +146,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             // return const HomeScreen(
                             //   id: 1,
                             // );
-                            return const HomeScreen(
+                            return const AssetsScreen(
                               id: 1,
                             );
                           },

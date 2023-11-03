@@ -1,33 +1,26 @@
-// ignore_for_file: unused_import
-
 import 'package:flutter/material.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:provider/provider.dart';
-import 'package:qr_flutter/qr_flutter.dart';
-import 'package:vibraguard/core/formaters/captalizer_test_formater.dart';
 import 'package:vibraguard/core/helpers/resources.dart';
 import 'package:vibraguard/model/assets/asset_model.dart';
 import 'package:vibraguard/viewmodel/assets_view_model.dart';
 import 'package:vibraguard/views/screens/assets/asset_detail_screen.dart';
 import 'package:vibraguard/views/screens/qrcode/barcode_scanner_window.dart';
-import 'package:vibraguard/views/shared/components/button_primary.dart';
 import 'package:vibraguard/views/shared/theme/config.dart';
-import 'package:vibraguard/views/shared/theme/theme_mode.dart';
 
-class HomeScreen extends StatefulWidget {
+class AssetsScreen extends StatefulWidget {
   final int id;
 
-  const HomeScreen({super.key, required this.id});
+  const AssetsScreen({super.key, required this.id});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<AssetsScreen> createState() => _AssetsScreenState();
 
   void dispose() {
     // FlutterNativeSplash.remove();
   }
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _AssetsScreenState extends State<AssetsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
