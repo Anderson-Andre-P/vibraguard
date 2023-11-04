@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vibraguard/core/helpers/resources.dart';
 import 'package:vibraguard/views/screens/assets/assets_screen.dart';
+import 'package:vibraguard/views/screens/profile_screen.dart';
 
 import 'orders/orders_screen.dart';
 
@@ -19,15 +20,7 @@ class _NavigationState extends State<Navigation> {
       id: 1,
     ),
     const OrdersScreen(),
-    const AssetsScreen(
-      id: 1,
-    ),
-    const AssetsScreen(
-      id: 1,
-    ),
-    const AssetsScreen(
-      id: 1,
-    ),
+    const ProfileScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -54,9 +47,7 @@ class _NavigationState extends State<Navigation> {
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItemMethod(Icons.home, "Home"),
           BottomNavigationBarItemMethod(Icons.access_time, "Orders"),
-          BottomNavigationBarItemMethod(Icons.bar_chart, "History"),
           BottomNavigationBarItemMethod(Icons.person, "Profile"),
-          BottomNavigationBarItemMethod(Icons.settings, "Settings"),
         ],
       ),
     );

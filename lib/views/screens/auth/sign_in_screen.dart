@@ -2,10 +2,12 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
+import 'package:vibraguard/core/helpers/resources.dart';
 import 'package:vibraguard/views/screens/auth/sign_up_screen.dart';
 import 'package:vibraguard/views/screens/navigation.dart';
 
 import '../../shared/components/button_primary.dart';
+import '../../shared/components/input_text.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
@@ -64,39 +66,31 @@ class _SignInScreenState extends State<SignInScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        'E-mail',
-                        style: Theme.of(context).textTheme.titleSmall,
-                      ),
-                      const SizedBox(height: 12),
-                      TextFormField(
+                      const SizedBox(height: 24),
+                      InputTextCustom(
                         keyboardType: TextInputType.emailAddress,
-                        textInputAction: TextInputAction.next,
-                        decoration: const InputDecoration(
-                            hintText: 'Enter your e-mail'),
+                        enabled: true,
+                        hintText: "Enter your e-mail",
+                        inputIcon: Icons.email,
+                        maxLines: 1,
+                        borderValidator: Colors.red,
+                        maxLength: 100,
                         validator: _emailValidator,
                       ),
-                      const SizedBox(height: 24),
-                      Text(
-                        'Password',
-                        style: Theme.of(context).textTheme.titleSmall,
-                      ),
-                      const SizedBox(height: 12),
-                      TextFormField(
-                        obscureText: _obscureText,
-                        decoration: InputDecoration(
-                          hintText: 'Enter your password',
-                          suffixIcon: IconButton(
-                            icon: Icon(_obscureText
-                                ? Icons.visibility_off
-                                : Icons.visibility),
-                            onPressed: () {
-                              setState(() {
-                                _obscureText = !_obscureText;
-                              });
-                            },
-                          ),
-                        ),
+                      InputTextCustom(
+                        keyboardType: TextInputType.text,
+                        enabled: true,
+                        hintText: "Enter your password",
+                        inputIcon: Icons.lock,
+                        maxLines: 1,
+                        borderValidator: Colors.red,
+                        maxLength: 100,
+                        sufixIcon: _obscureText
+                            ? Icons.visibility_off
+                            : Icons.visibility,
+                        sufixOnPressed: () => setState(() {
+                          _obscureText = !_obscureText;
+                        }),
                         validator: _passwordValidator,
                       ),
                       Align(
@@ -105,9 +99,13 @@ class _SignInScreenState extends State<SignInScreen> {
                           onPressed: () {
                             // Implement forgot password
                           },
-                          child: const Text(
+                          child: Text(
                             'Forgot password?',
-                            style: TextStyle(color: Color(0xFF3D80DE)),
+                            style: TextStyle(
+                                color: R.colors.lightPrimaryColor,
+                                fontSize: R.fontSize.fs12,
+                                fontFamily: R.fontFamily.secondaryFont,
+                                fontWeight: R.fontWeight.normal),
                           ),
                         ),
                       ),
@@ -144,11 +142,11 @@ class _SignInScreenState extends State<SignInScreen> {
                 RichText(
                   text: TextSpan(
                     text: "Don't have an account? ",
-                    style: const TextStyle(color: Colors.black),
+                    style: TextStyle(color: R.colors.lightCommonTextColor),
                     children: <TextSpan>[
                       TextSpan(
                         text: 'Sign up',
-                        style: const TextStyle(color: Color(0xFF3D80DE)),
+                        style: TextStyle(color: R.colors.lightPrimaryColor),
                         recognizer: TapGestureRecognizer()
                           ..onTap = () {
                             Navigator.push(

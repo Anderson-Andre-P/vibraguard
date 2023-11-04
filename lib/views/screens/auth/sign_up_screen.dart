@@ -7,6 +7,7 @@ import 'package:top_snackbar_flutter/top_snack_bar.dart';
 import 'package:vibraguard/views/screens/navigation.dart';
 
 import '../../shared/components/button_primary.dart';
+import '../../shared/components/input_text.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -17,11 +18,8 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends State<SignUpScreen> {
   final _formKey = GlobalKey<FormState>();
-  bool _obscureTextOne = true;
-  bool _obscureTextTwo = true;
 
-  final TextEditingController _pass = TextEditingController();
-  final TextEditingController _confirmPass = TextEditingController();
+  bool _obscureText = true;
 
   String? _emailValidator(String? value) {
     if (value == null || value.isEmpty) {
@@ -70,72 +68,31 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        'E-mail',
-                        style: Theme.of(context).textTheme.titleSmall,
-                      ),
-                      const SizedBox(height: 12),
-                      TextFormField(
-                        keyboardType: TextInputType.emailAddress,
-                        textInputAction: TextInputAction.next,
-                        decoration: const InputDecoration(
-                            hintText: 'Enter your e-mail'),
+                      InputTextCustom(
+                        keyboardType: TextInputType.text,
+                        enabled: true,
+                        hintText: "Enter your e-mail",
+                        inputIcon: Icons.email,
+                        maxLines: 1,
+                        borderValidator: Colors.red,
+                        maxLength: 100,
                         validator: _emailValidator,
                       ),
-                      const SizedBox(height: 24),
-                      Text(
-                        'Password',
-                        style: Theme.of(context).textTheme.titleSmall,
-                      ),
-                      const SizedBox(height: 12),
-                      TextFormField(
-                        obscureText: _obscureTextOne,
-                        controller: _pass,
-                        decoration: InputDecoration(
-                          hintText: 'Enter your password',
-                          suffixIcon: IconButton(
-                            icon: Icon(_obscureTextOne
-                                ? Icons.visibility_off
-                                : Icons.visibility),
-                            onPressed: () {
-                              setState(() {
-                                _obscureTextOne = !_obscureTextOne;
-                              });
-                            },
-                          ),
-                        ),
-                        validator: (val) {
-                          if (val!.isEmpty) {
-                            return 'Empty fiel';
-                          }
-                          return null;
-                        },
-                      ),
-                      TextFormField(
-                        obscureText: _obscureTextTwo,
-                        controller: _confirmPass,
-                        decoration: InputDecoration(
-                          hintText: 'Enter your password',
-                          suffixIcon: IconButton(
-                            icon: Icon(_obscureTextTwo
-                                ? Icons.visibility_off
-                                : Icons.visibility),
-                            onPressed: () {
-                              setState(() {
-                                _obscureTextTwo = !_obscureTextTwo;
-                              });
-                            },
-                          ),
-                        ),
-                        validator: (val) {
-                          if (val!.isEmpty) {
-                            return 'Empty fiel';
-                          }
-                          if (val != _pass.text) {
-                            return 'Passwords not Match';
-                          }
-                          return null;
-                        },
+                      InputTextCustom(
+                        keyboardType: TextInputType.text,
+                        enabled: true,
+                        hintText: "Enter your password",
+                        inputIcon: Icons.lock,
+                        maxLines: 1,
+                        borderValidator: Colors.red,
+                        maxLength: 100,
+                        sufixIcon: _obscureText
+                            ? Icons.visibility_off
+                            : Icons.visibility,
+                        sufixOnPressed: () => setState(() {
+                          _obscureText = !_obscureText;
+                        }),
+                        validator: _passwordValidator,
                       ),
                     ],
                   ),

@@ -15,4 +15,12 @@ class InputValidation {
     final isValid = value.isNotEmpty != true || regex.hasMatch(value);
     return isValid;
   }
+
+  static bool validatePassword(String? value) {
+    value = value!.trim();
+    final regex = RegExp(
+        r"^(?!.* )(?!.* [a-zA-ZÀ-ÖØ-öø-ÿ])(?=.\d)(?=.?[A-Z])(?=.?[a-z])(?=.?[0-9])(?=.?[!@#\$%^&(),.?:{}|<>]).{6,40}$");
+    final isValid = value.isNotEmpty != true || regex.hasMatch(value);
+    return isValid;
+  }
 }

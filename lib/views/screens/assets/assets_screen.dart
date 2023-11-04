@@ -36,11 +36,21 @@ class _AssetsScreenState extends State<AssetsScreen> {
           children: [
             Text(
               "Good Morning",
-              style: ThemeData.light().textTheme.bodyLarge,
+              style: TextStyle(
+                color: R.colors.lightCommonTextColor,
+                fontFamily: R.fontFamily.primaryFont,
+                fontSize: R.fontSize.fs14,
+                fontWeight: R.fontWeight.normal,
+              ),
             ),
             Text(
               "Anderson André",
-              style: ThemeData.light().textTheme.bodyLarge,
+              style: TextStyle(
+                color: R.colors.lightTitleTextColor,
+                fontFamily: R.fontFamily.primaryFont,
+                fontSize: R.fontSize.fs19,
+                fontWeight: R.fontWeight.normal,
+              ),
             )
           ],
         ),

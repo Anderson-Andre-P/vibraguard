@@ -69,12 +69,6 @@ class AssetDetailScreen extends StatelessWidget {
           onPressed: () => {Navigator.pop(context, true)},
           icon: Icon(Icons.arrow_back, color: R.colors.lightIconColor),
         ),
-        actions: [
-          IconButton(
-            onPressed: () => {},
-            icon: Icon(Icons.notifications, color: R.colors.lightIconColor),
-          ),
-        ],
       ),
       body: ChangeNotifierProvider(
         create: (_) => AssetsViewModel(),
