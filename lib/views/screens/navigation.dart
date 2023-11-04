@@ -14,18 +14,18 @@ class Navigation extends StatefulWidget {
 class _NavigationState extends State<Navigation> {
   int _selectedIndex = 0;
 
-  static const List<Widget> _widgetOptions = <Widget>[
-    AssetsScreen(
+  static final List<Widget> _widgetOptions = <Widget>[
+    const AssetsScreen(
       id: 1,
     ),
-    OrdersScreen(),
-    AssetsScreen(
+    const OrdersScreen(),
+    const AssetsScreen(
       id: 1,
     ),
-    AssetsScreen(
+    const AssetsScreen(
       id: 1,
     ),
-    AssetsScreen(
+    const AssetsScreen(
       id: 1,
     ),
   ];
