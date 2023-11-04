@@ -5,7 +5,8 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vibraguard/core/helpers/resources.dart';
-import 'package:vibraguard/viewmodel/assets_view_model.dart';
+import 'package:vibraguard/viewmodel/assets/assets_view_model.dart';
+import 'package:vibraguard/viewmodel/work_orders/work_order_view_model.dart';
 import 'package:vibraguard/views/screens/navigation.dart';
 import 'package:vibraguard/views/screens/onboarding_screen.dart';
 import 'package:vibraguard/views/shared/theme/app_theme.dart';
@@ -36,9 +37,9 @@ Future<void> main() async {
         // ChangeNotifierProvider<UsersViewModel>(
         //   create: (_) => UsersViewModel(),
         // ),
-        // ChangeNotifierProvider<WorkOrdersViewModel>(
-        //   create: (_) => WorkOrdersViewModel(),
-        // ),
+        ChangeNotifierProvider<WorkOrdersViewModel>(
+          create: (_) => WorkOrdersViewModel(),
+        ),
       ],
       child: MainApp(
         isFirstOpen: isFirstOpen,

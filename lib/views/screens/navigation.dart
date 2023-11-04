@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:vibraguard/core/helpers/resources.dart';
 import 'package:vibraguard/views/screens/assets/assets_screen.dart';
 
+import 'orders/orders_screen.dart';
+
 class Navigation extends StatefulWidget {
   const Navigation({super.key});
 
@@ -16,9 +18,7 @@ class _NavigationState extends State<Navigation> {
     AssetsScreen(
       id: 1,
     ),
-    AssetsScreen(
-      id: 1,
-    ),
+    OrdersScreen(),
     AssetsScreen(
       id: 1,
     ),
