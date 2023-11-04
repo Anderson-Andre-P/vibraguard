@@ -7,11 +7,11 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:vibraguard/core/helpers/resources.dart';
 import 'package:vibraguard/model/assets/asset_model.dart';
 import 'package:vibraguard/model/assets/health_history_model.dart';
+import 'package:vibraguard/viewmodel/assets/assets_view_model.dart';
 import 'package:vibraguard/views/screens/assets/assets_screen.dart';
 import '../../../core/formaters/date_time_formater.dart';
 import '../../../core/formaters/decimal_formater.dart';
 import '../../../core/formaters/time_stamp_formater.dart';
-import '../../../viewmodel/assets_view_model.dart';
 import '../../shared/components/status_colors_to_badges.dart';
 
 class AssetDetailScreen extends StatelessWidget {

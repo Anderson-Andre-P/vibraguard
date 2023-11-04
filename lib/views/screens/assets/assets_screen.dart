@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:vibraguard/core/helpers/resources.dart';
 import 'package:vibraguard/model/assets/asset_model.dart';
-import 'package:vibraguard/viewmodel/assets_view_model.dart';
+import 'package:vibraguard/viewmodel/assets/assets_view_model.dart';
 import 'package:vibraguard/views/screens/assets/asset_detail_screen.dart';
 import 'package:vibraguard/views/screens/qrcode/barcode_scanner_window.dart';
 import 'package:vibraguard/views/shared/theme/config.dart';
