@@ -29,6 +29,7 @@ dependencies:
   accordion: ^2.6.0
   intl: ^0.18.1
   syncfusion_flutter_charts: ^23.1.43
+  get: ^4.6.6
 
 dev_dependencies:
   flutter_test:
