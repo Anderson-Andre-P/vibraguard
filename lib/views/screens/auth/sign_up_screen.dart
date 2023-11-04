@@ -1,22 +1,27 @@
+// ignore_for_file: unused_element
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
-import 'package:vibraguard/views/screens/auth/sign_up_screen.dart';
 import 'package:vibraguard/views/screens/navigation.dart';
 
 import '../../shared/components/button_primary.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignUpScreenState extends State<SignUpScreen> {
   final _formKey = GlobalKey<FormState>();
-  bool _obscureText = true;
+  bool _obscureTextOne = true;
+  bool _obscureTextTwo = true;
+
+  final TextEditingController _pass = TextEditingController();
+  final TextEditingController _confirmPass = TextEditingController();
 
   String? _emailValidator(String? value) {
     if (value == null || value.isEmpty) {
@@ -31,8 +36,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
   String? _passwordValidator(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Please enter your password';
+      return 'Please enter a valid password';
     }
+
     return null;
   }
 
@@ -50,14 +56,14 @@ class _LoginScreenState extends State<LoginScreen> {
                 Image.asset('assets/images/logo/logo.png'),
                 SizedBox(height: MediaQuery.of(context).size.height * 0.05),
                 Text(
-                  'Welcome back!',
+                  'Welcome!',
                   style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                         fontWeight: FontWeight.w600,
                         color: Colors.black,
                       ),
                 ),
                 const SizedBox(height: 16),
-                const Text('Please login to access our application'),
+                const Text('Please create account to access the application'),
                 const SizedBox(height: 32),
                 Form(
                   key: _formKey,
@@ -83,39 +89,59 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       const SizedBox(height: 12),
                       TextFormField(
-                        obscureText: _obscureText,
+                        obscureText: _obscureTextOne,
+                        controller: _pass,
                         decoration: InputDecoration(
                           hintText: 'Enter your password',
                           suffixIcon: IconButton(
-                            icon: Icon(_obscureText
+                            icon: Icon(_obscureTextOne
                                 ? Icons.visibility_off
                                 : Icons.visibility),
                             onPressed: () {
                               setState(() {
-                                _obscureText = !_obscureText;
+                                _obscureTextOne = !_obscureTextOne;
                               });
                             },
                           ),
                         ),
-                        validator: _passwordValidator,
+                        validator: (val) {
+                          if (val!.isEmpty) {
+                            return 'Empty fiel';
+                          }
+                          return null;
+                        },
                       ),
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: TextButton(
-                          onPressed: () {
-                            // Implement forgot password
-                          },
-                          child: const Text(
-                            'Forgot password?',
-                            style: TextStyle(color: Color(0xFF3D80DE)),
+                      TextFormField(
+                        obscureText: _obscureTextTwo,
+                        controller: _confirmPass,
+                        decoration: InputDecoration(
+                          hintText: 'Enter your password',
+                          suffixIcon: IconButton(
+                            icon: Icon(_obscureTextTwo
+                                ? Icons.visibility_off
+                                : Icons.visibility),
+                            onPressed: () {
+                              setState(() {
+                                _obscureTextTwo = !_obscureTextTwo;
+                              });
+                            },
                           ),
                         ),
+                        validator: (val) {
+                          if (val!.isEmpty) {
+                            return 'Empty fiel';
+                          }
+                          if (val != _pass.text) {
+                            return 'Passwords not Match';
+                          }
+                          return null;
+                        },
                       ),
                     ],
                   ),
                 ),
                 ButtonPrimary(
-                  title: "Log in",
+                  title: "Create account",
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       showTopSnackBar(
@@ -139,28 +165,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       );
                     }
                   },
-                ),
-                const SizedBox(height: 16),
-                RichText(
-                  text: TextSpan(
-                    text: "Don't have an account? ",
-                    style: const TextStyle(color: Colors.black),
-                    children: <TextSpan>[
-                      TextSpan(
-                        text: 'Sign up',
-                        style: const TextStyle(color: Color(0xFF3D80DE)),
-                        recognizer: TapGestureRecognizer()
-                          ..onTap = () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const SignUpScreen(),
-                              ),
-                            );
-                          },
-                      ),
-                    ],
-                  ),
                 ),
               ],
             ),

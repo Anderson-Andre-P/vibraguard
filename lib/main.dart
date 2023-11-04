@@ -1,4 +1,4 @@
-// ignore_for_file: unused_local_variable
+// ignore_for_file: unused_local_variable, library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -8,7 +8,6 @@ import 'package:vibraguard/core/helpers/resources.dart';
 import 'package:vibraguard/viewmodel/assets/assets_view_model.dart';
 import 'package:vibraguard/viewmodel/work_orders/work_order_view_model.dart';
 import 'package:vibraguard/views/screens/auth/login_screen.dart';
-import 'package:vibraguard/views/screens/navigation.dart';
 import 'package:vibraguard/views/screens/onboarding_screen.dart';
 import 'package:vibraguard/views/shared/theme/app_theme.dart';
 import 'package:vibraguard/views/shared/theme/config.dart';
