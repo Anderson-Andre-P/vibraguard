@@ -38,29 +38,29 @@ Cor do badge: 3D7BF7
 
 <summary>Click me for see a demo image of app</summary>
 
-|             Sign In              |               Sign Up                |
-| :------------------------------: | :----------------------------------: |
-| ![Settings](/images/sign_in.png) | ![Change Theme](/images/sign_up.png) |
+|              Onboarding               |             Sign In             |             Sign Up             |
+| :-----------------------------------: | :-----------------------------: | :-----------------------------: |
+| ![Onboarding](/images/onboarding.png) | ![Sign In](/images/sign_in.png) | ![Sign Up](/images/sign_up.png) |
 
-|             All Assets              |               Scaner                |
-| :---------------------------------: | :---------------------------------: |
-| ![Settings](/images/all_assets.png) | ![Change Theme](/images/scaner.png) |
+|              All Assets               |            Scaner             |
+| :-----------------------------------: | :---------------------------: |
+| ![All Assets](/images/all_assets.png) | ![Scaner](/images/scaner.png) |
 
-|             Assets Details One             |               Assets Details Two               |
-| :----------------------------------------: | :--------------------------------------------: |
-| ![Settings](/images/asset_details_one.png) | ![Change Theme](/images/asset_details_two.png) |
+|                Assets Details One                |                Assets Details Two                |
+| :----------------------------------------------: | :----------------------------------------------: |
+| ![Assets Details](/images/asset_details_one.png) | ![Assets Details](/images/asset_details_two.png) |
 
-|             Work Orders              |               Work Orders Details                |
-| :----------------------------------: | :----------------------------------------------: |
-| ![Settings](/images/work_orders.png) | ![Change Theme](/images/work_orders_details.png) |
+|               Work Orders               |                   Work Orders Details                   |
+| :-------------------------------------: | :-----------------------------------------------------: |
+| ![Work Orders](/images/work_orders.png) | ![Work Orders Details](/images/work_orders_details.png) |
 
-|          Validation Success          |               Validation Error                |
-| :----------------------------------: | :-------------------------------------------: |
-| ![Settings](/images/login_acept.png) | ![Change Theme](/images/validation_error.png) |
+|               Validation Success               |                 Validation Error                  |
+| :--------------------------------------------: | :-----------------------------------------------: |
+| ![Validation Success](/images/login_acept.png) | ![Validation Error](/images/validation_error.png) |
 
-|             About              |               About Project                |
-| :----------------------------: | :----------------------------------------: |
-| ![Settings](/images/about.png) | ![Change Theme](/images/about_project.png) |
+|            About            |                About Project                |
+| :-------------------------: | :-----------------------------------------: |
+| ![About](/images/about.png) | ![About Project](/images/about_project.png) |
 
 </details>
 
