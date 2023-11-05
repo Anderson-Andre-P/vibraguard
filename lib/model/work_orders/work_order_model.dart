@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_null_comparison
+
 import 'package:vibraguard/model/work_orders/check_list_model.dart';
 
 class WorkOrders {

@@ -6,6 +6,7 @@ import 'package:vibraguard/core/helpers/resources.dart';
 import 'package:vibraguard/views/screens/auth/sign_up_screen.dart';
 import 'package:vibraguard/views/screens/navigation.dart';
 
+import '../../../core/helpers/images/image_paths.dart';
 import '../../shared/components/button_primary.dart';
 import '../../shared/components/input_text.dart';
 
@@ -22,18 +23,21 @@ class _SignInScreenState extends State<SignInScreen> {
 
   String? _emailValidator(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Please enter your e-mail';
+      return R.string.emptyEmail;
     }
     if (!RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$')
         .hasMatch(value)) {
-      return 'Please enter a valid e-mail';
+      return R.string.invalidEmail;
     }
     return null;
   }
 
   String? _passwordValidator(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Please enter your password';
+      return R.string.emptyPassword;
+    }
+    if (!RegExp(r'^.{4,20}$').hasMatch(value)) {
+      return R.string.invalidPassword;
     }
     return null;
   }
@@ -49,17 +53,17 @@ class _SignInScreenState extends State<SignInScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SizedBox(height: MediaQuery.of(context).size.height * 0.05),
-                Image.asset('assets/images/logo/logo.png'),
+                Image.asset(ImagePaths.logo),
                 SizedBox(height: MediaQuery.of(context).size.height * 0.05),
                 Text(
-                  'Welcome back!',
+                  R.string.loginTitle,
                   style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                         fontWeight: FontWeight.w600,
                         color: Colors.black,
                       ),
                 ),
                 const SizedBox(height: 16),
-                const Text('Please login to access our application'),
+                Text(R.string.loginSubTitle),
                 const SizedBox(height: 32),
                 Form(
                   key: _formKey,
@@ -70,7 +74,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       InputTextCustom(
                         keyboardType: TextInputType.emailAddress,
                         enabled: true,
-                        hintText: "Enter your e-mail",
+                        hintText: R.string.emailTitle,
                         inputIcon: Icons.email,
                         maxLines: 1,
                         borderValidator: Colors.red,
@@ -80,7 +84,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       InputTextCustom(
                         keyboardType: TextInputType.text,
                         enabled: true,
-                        hintText: "Enter your password",
+                        hintText: R.string.passwordTitle,
                         inputIcon: Icons.lock,
                         maxLines: 1,
                         borderValidator: Colors.red,
@@ -100,7 +104,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             // Implement forgot password
                           },
                           child: Text(
-                            'Forgot password?',
+                            R.string.forgotPassword,
                             style: TextStyle(
                                 color: R.colors.lightPrimaryColor,
                                 fontSize: R.fontSize.fs12,
@@ -113,13 +117,13 @@ class _SignInScreenState extends State<SignInScreen> {
                   ),
                 ),
                 ButtonPrimary(
-                  title: "Log in",
+                  title: R.string.loginButton,
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       showTopSnackBar(
                         Overlay.of(context),
-                        const CustomSnackBar.success(
-                          message: "Acepted credentials. Log in...",
+                        CustomSnackBar.success(
+                          message: R.string.validCredentials,
                         ),
                       );
                       Navigator.push(
@@ -130,9 +134,8 @@ class _SignInScreenState extends State<SignInScreen> {
                     } else {
                       showTopSnackBar(
                         Overlay.of(context),
-                        const CustomSnackBar.error(
-                          message:
-                              "Something went wrong. Please check your credentials and try again",
+                        CustomSnackBar.error(
+                          message: R.string.invalidCredentials,
                         ),
                       );
                     }
@@ -141,11 +144,11 @@ class _SignInScreenState extends State<SignInScreen> {
                 const SizedBox(height: 16),
                 RichText(
                   text: TextSpan(
-                    text: "Don't have an account? ",
+                    text: R.string.dontHaveAccount,
                     style: TextStyle(color: R.colors.lightCommonTextColor),
                     children: <TextSpan>[
                       TextSpan(
-                        text: 'Sign up',
+                        text: R.string.signupButton,
                         style: TextStyle(color: R.colors.lightPrimaryColor),
                         recognizer: TapGestureRecognizer()
                           ..onTap = () {

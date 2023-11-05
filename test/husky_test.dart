@@ -1,3 +1,5 @@
+// ignore_for_file: depend_on_referenced_packages
+
 import 'dart:io';
 
 import 'package:husky/husky.dart';
@@ -11,7 +13,7 @@ void main() {
   group('husky', () {
     test('should work by default', () async {
       final dir = tmp();
-      print('default dir: $dir');
+      // print('default dir: $dir');
 
       /// Setup
       await setupGit(dir);
@@ -41,7 +43,7 @@ void main() {
     });
     test('in custom dir should work', () async {
       final dir = tmp();
-      print('custom dir: $dir');
+      // print('custom dir: $dir');
 
       /// Setup
       await setupGit(dir);
@@ -64,7 +66,7 @@ void main() {
     });
     test('in sub dir should work', () async {
       final dir = tmp();
-      print('sub dir: $dir');
+      // print('sub dir: $dir');
 
       /// Setup
       await setupGit(dir);
@@ -90,7 +92,7 @@ void main() {
     });
     test('install in non-git dir should not fail', () async {
       final dir = tmp();
-      print('non-git dir: $dir');
+      // print('non-git dir: $dir');
 
       /// Setup
       await setupGit(dir);
@@ -101,7 +103,7 @@ void main() {
     });
     test('set/add should work', () async {
       final dir = tmp();
-      print('set/add dir: $dir');
+      // print('set/add dir: $dir');
 
       /// Setup
       await setupGit(dir);
@@ -133,7 +135,7 @@ void main() {
     });
     test('hook with exitCode 127 should terminate', () async {
       final dir = tmp();
-      print('exit-127 dir: $dir');
+      // print('exit-127 dir: $dir');
 
       /// Setup
       await setupGit(dir);

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:vibraguard/core/helpers/resources.dart';
 
+import '../../core/helpers/images/image_paths.dart';
+
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
 
@@ -14,7 +16,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'About this app',
+          R.string.aboutTitle,
           style: ThemeData.light().textTheme.bodyLarge,
         ),
         backgroundColor: R.colors.lightPrimaryBackgroundColor,
@@ -26,9 +28,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ),
       ),
       body: ListTile(
-        title: const Text('About'),
-        subtitle:
-            const Text('Discover more information about the application.'),
+        title: Text(R.string.about),
+        subtitle: Text(R.string.aboutSubtitle),
         trailing: const Icon(Icons.chevron_right),
         onTap: () {
           showAboutDialog(
@@ -44,50 +45,49 @@ class _ProfileScreenState extends State<ProfileScreen> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: const Text('About'),
+          title: Text(R.string.about),
           content: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
               Image.asset(
-                'assets/images/logo/logo.png',
+                ImagePaths.logo,
                 height: 64,
               ),
               const SizedBox(height: 16),
-              const Text(
-                'VibraGuard',
-                style: TextStyle(
+              Text(
+                R.string.titleOfApp,
+                style: const TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               const SizedBox(height: 8),
-              const Text(
-                'Version 1.0.0',
-                style: TextStyle(
+              Text(
+                R.string.appVersion,
+                style: const TextStyle(
                   fontSize: 16,
                   color: Colors.grey,
                 ),
               ),
               const SizedBox(height: 16),
-              const Text(
-                'Description:',
-                style: TextStyle(
+              Text(
+                R.string.description,
+                style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const Text(
-                  "This is an application that I developed as a challenge for the Tractian selection process."),
+              Text(R.string.appDescription),
               const SizedBox(height: 16),
-              const Text(
-                'Developed by:',
-                style: TextStyle(
+              Text(
+                R.string.developedBy,
+                style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const Text('Anderson André'),
+              Text(R.string.autor),
             ],
           ),
           actions: [
@@ -95,7 +95,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: const Text('Close'),
+              child: Text(R.string.close),
             ),
           ],
         );

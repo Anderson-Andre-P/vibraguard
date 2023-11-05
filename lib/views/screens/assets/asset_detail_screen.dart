@@ -10,7 +10,6 @@ import 'package:vibraguard/model/assets/health_history_model.dart';
 import 'package:vibraguard/viewmodel/assets/assets_view_model.dart';
 import 'package:vibraguard/views/screens/assets/assets_screen.dart';
 import '../../../core/formaters/date_time_formater.dart';
-import '../../../core/formaters/decimal_formater.dart';
 import '../../../core/formaters/time_stamp_formater.dart';
 import '../../shared/components/status_colors_to_badges.dart';
 
@@ -59,7 +58,7 @@ class AssetDetailScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Asset details',
+          R.string.assetDetails,
           style: ThemeData.light().textTheme.bodyLarge,
         ),
         backgroundColor: R.colors.lightPrimaryBackgroundColor,
@@ -80,7 +79,7 @@ class AssetDetailScreen extends StatelessWidget {
                 child: SizedBoxWithCircularProgressIndicatorWidget(),
               );
             } else if (snapshot.hasError) {
-              return Text('Erro: ${snapshot.error}');
+              return Text('Error: ${snapshot.error}');
             } else if (snapshot.data == null) {
               return Text(R.string.itemNotFound);
             } else {
@@ -95,9 +94,9 @@ class AssetDetailScreen extends StatelessWidget {
                     child: SizedBoxWithCircularProgressIndicatorWidget(),
                   );
                 } else if (snapshot.hasError) {
-                  return Text('Erro: ${snapshot.error}');
+                  return Text('Error: ${snapshot.error}');
                 } else if (snapshot.data == null) {
-                  return Text('Item não encontrado para ID: ${id + 1}');
+                  return Text('Item not found for ID ${id + 1}');
                 } else {
                   final assets = snapshot.data!;
                   var assetsSensors = assets.sensors;
@@ -173,7 +172,7 @@ class AssetDetailScreen extends StatelessWidget {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text("Summary of asset"),
+                                Text(R.string.sumaryOfAssets),
                                 const SizedBox(height: 16.0),
                                 Container(
                                   width: double.infinity,
@@ -189,7 +188,7 @@ class AssetDetailScreen extends StatelessWidget {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      const Text("Model"),
+                                      Text(R.string.modelOfAsset),
                                       Text(
                                         "${assets.model}",
                                         style: TextStyle(
@@ -230,7 +229,7 @@ class AssetDetailScreen extends StatelessWidget {
                                         color: R.colors.lightIconColor,
                                       ),
                                       header: Text(
-                                        'Sensors',
+                                        R.string.sensorsOfAsset,
                                         style: TextStyle(
                                           color: R.colors.lightTitleTextColor,
                                           fontSize: R.fontSize.fs16,
@@ -299,7 +298,7 @@ class AssetDetailScreen extends StatelessWidget {
                                         color: R.colors.lightIconColor,
                                       ),
                                       header: Text(
-                                        'Metrics',
+                                        R.string.metricsOfAsset,
                                         style: TextStyle(
                                           color: R.colors.lightTitleTextColor,
                                           fontSize: R.fontSize.fs16,
@@ -324,7 +323,7 @@ class AssetDetailScreen extends StatelessWidget {
                                                     children: <TextSpan>[
                                                       TextSpan(
                                                         text:
-                                                            'Last uptime: ${DateTimeFormatter.formatDateTime(assets.metrics!.lastUptimeAt!)}',
+                                                            '${R.string.lastUptimeOfAsset} ${DateTimeFormatter.formatDateTime(assets.metrics!.lastUptimeAt!)}',
                                                       ),
                                                     ],
                                                   ),
@@ -340,7 +339,7 @@ class AssetDetailScreen extends StatelessWidget {
                                                     children: <TextSpan>[
                                                       TextSpan(
                                                         text:
-                                                            'Total collects uptime: ${assets.metrics!.totalCollectsUptime}',
+                                                            '${R.string.totalCollectsUptimeOfAsset} ${assets.metrics!.totalCollectsUptime}',
                                                       ),
                                                     ],
                                                   ),
@@ -356,7 +355,7 @@ class AssetDetailScreen extends StatelessWidget {
                                                     children: <TextSpan>[
                                                       TextSpan(
                                                         text:
-                                                            'Total uptime: ${DecimalFormatter.formatDecimal(assets.metrics!.totalUptime!)}',
+                                                            '${R.string.lastUptimeOfAsset} ${(assets.metrics!.totalUptime!).toStringAsFixed(2)}',
                                                       ),
                                                     ],
                                                   ),
@@ -387,7 +386,7 @@ class AssetDetailScreen extends StatelessWidget {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        "Health history",
+                                        R.string.healthHistoryOfAsset,
                                         style: TextStyle(
                                           color: R.colors.lightTitleTextColor,
                                           fontSize: R.fontSize.fs16,

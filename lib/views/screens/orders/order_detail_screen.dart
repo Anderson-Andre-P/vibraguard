@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:vibraguard/core/helpers/resources.dart';
@@ -34,7 +36,7 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Work order details',
+          R.string.workOrderDetails,
           style: ThemeData.light().textTheme.bodyLarge,
         ),
         backgroundColor: R.colors.lightPrimaryBackgroundColor,
@@ -58,7 +60,7 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
             } else if (snapshot.hasError) {
               return Text('Error: ${snapshot.error}');
             } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-              return const Text('No user names found.');
+              return const Text('No user names found');
             } else {
               final userNamesMap = snapshot.data!;
 
@@ -83,7 +85,7 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                       height: 16,
                     ),
                     Text(
-                      'Description: ${widget.workOrderDescription}',
+                      '${R.string.addWorkOrderInputDescription}: ${widget.workOrderDescription}',
                       style: const TextStyle(
                         color: Colors.black,
                         fontSize: 16,
@@ -93,7 +95,7 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                       height: 16,
                     ),
                     Text(
-                      'Priority: ${widget.workOrderPriority}',
+                      '${R.string.addWorkOrderInputPriority}: ${widget.workOrderPriority}',
                       style: const TextStyle(
                         color: Colors.black,
                         fontSize: 16,
@@ -103,7 +105,7 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                       height: 16,
                     ),
                     Text(
-                      'Status: ${widget.workOrdersStatus}',
+                      '${R.string.workOrderStatus}: ${widget.workOrdersStatus}',
                       style: const TextStyle(
                         color: Colors.black,
                         fontSize: 16,
@@ -112,11 +114,11 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                     const SizedBox(
                       height: 16,
                     ),
-                    const Row(
+                    Row(
                       children: [
                         Text(
-                          'Assigned To',
-                          style: TextStyle(
+                          R.string.workOrderAssignedTo,
+                          style: const TextStyle(
                             color: Colors.black,
                             fontSize: 16,
                           ),
@@ -128,15 +130,15 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                     ),
                     for (final assignedTo in widget.workOrderAssigned)
                       Text(
-                          'Assigned to: ${userNamesMap[assignedTo] ?? 'Unknown User'}'),
+                          '${R.string.workOrderAssignedTo}: ${userNamesMap[assignedTo] ?? R.string.workOrderUnknowUser}'),
                     const SizedBox(
                       height: 16,
                     ),
-                    const Row(
+                    Row(
                       children: [
                         Text(
-                          'Checklist',
-                          style: TextStyle(
+                          R.string.workOrderChecklist,
+                          style: const TextStyle(
                             color: Colors.black,
                             fontSize: 16,
                           ),

@@ -19,6 +19,10 @@ Future<void> main() async {
   final bool isFirstOpen = prefs.getBool('firstOpen') ?? true;
   // FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
+  if (isFirstOpen) {
+    await prefs.setBool('firstOpen', false);
+  }
+
   SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
 
@@ -28,13 +32,6 @@ Future<void> main() async {
         ChangeNotifierProvider<AssetsViewModel>(
           create: (_) => AssetsViewModel(),
         ),
-
-        // ChangeNotifierProvider<CompaniesViewModel>(
-        //   create: (_) => CompaniesViewModel(),
-        // ),
-        // ChangeNotifierProvider<UnitsViewModel>(
-        //   create: (_) => UnitsViewModel(),
-        // ),
         ChangeNotifierProvider<UsersViewModel>(
           create: (_) => UsersViewModel(),
         ),
@@ -52,9 +49,9 @@ Future<void> main() async {
 
 class MainApp extends StatefulWidget {
   final bool isFirstOpen;
-  final SharedPreferences prefs;
 
-  const MainApp({required this.isFirstOpen, required this.prefs, Key? key})
+  const MainApp(
+      {required this.isFirstOpen, Key? key, required SharedPreferences prefs})
       : super(key: key);
 
   @override
@@ -63,32 +60,6 @@ class MainApp extends StatefulWidget {
 
 class _MainAppState extends State<MainApp> {
   @override
-  void initState() {
-    super.initState();
-    currentTheme.addListener(() {
-      setState(() {});
-    });
-
-    if (widget.isFirstOpen) {
-      _showOnboardingScreen();
-    }
-  }
-
-  void _showOnboardingScreen() {
-    WidgetsBinding.instance.addPostFrameCallback(
-      (_) {
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) {
-            return const OnboardingScreen();
-          }),
-        );
-
-        widget.prefs.setBool('firstOpen', false);
-      },
-    );
-  }
-
-  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: R.string.titleOfApp,
@@ -96,7 +67,8 @@ class _MainAppState extends State<MainApp> {
       darkTheme: appThemeLight(),
       themeMode: currentTheme.currentTheme(),
       debugShowCheckedModeBanner: false,
-      home: const SignInScreen(),
+      home:
+          widget.isFirstOpen ? const OnboardingScreen() : const SignInScreen(),
     );
   }
 }

@@ -3,9 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:vibraguard/core/helpers/resources.dart';
 import 'package:vibraguard/model/work_orders/work_order_model.dart';
 import 'package:vibraguard/viewmodel/work_orders/work_order_view_model.dart';
-import 'package:vibraguard/views/screens/orders/add_work_order_modal.dart';
 import 'package:vibraguard/views/screens/orders/order_detail_screen.dart';
-import 'package:vibraguard/views/screens/orders/work_order_provider.dart';
 import 'package:vibraguard/views/shared/components/status_colors_to_badges.dart';
 
 class OrdersScreen extends StatefulWidget {
@@ -20,14 +18,14 @@ class _OrdersScreenState extends State<OrdersScreen> {
 
   final _titleController = TextEditingController();
   final _descriptionController = TextEditingController();
-  String _selectedPriority = 'High';
+  String _selectedPriority = R.string.addWorkOrderHighPriority;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Work Orders',
+          R.string.workOrders,
           style: ThemeData.light().textTheme.bodyLarge,
         ),
         backgroundColor: R.colors.lightPrimaryBackgroundColor,
@@ -48,7 +46,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
                 child: CircularProgressIndicator(),
               );
             } else if (snapshot.hasError) {
-              return Text('Erro: ${snapshot.error}');
+              return Text('Error: ${snapshot.error}');
             } else if (snapshot.data == null) {
               return Text(R.string.itemNotFound);
             } else {
@@ -60,9 +58,9 @@ class _OrdersScreenState extends State<OrdersScreen> {
                       child: CircularProgressIndicator(),
                     );
                   } else if (snapshot.hasError) {
-                    return Text('Erro: ${snapshot.error}');
+                    return Text('Error: ${snapshot.error}');
                   } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                    return const Text('Nenhum item encontrado.');
+                    return const Text('No items found');
                   } else {
                     final workOrdersList = snapshot.data!;
 
@@ -183,34 +181,40 @@ class _OrdersScreenState extends State<OrdersScreen> {
             context: context,
             builder: (context) {
               return AlertDialog(
-                title: const Text('Add Work Order'),
+                title: Text(R.string.addWorkOrder),
                 content: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     TextFormField(
                       controller: _titleController,
-                      decoration: const InputDecoration(labelText: 'Title'),
+                      decoration: InputDecoration(
+                          labelText: R.string.addWorkOrderInputTitle),
                     ),
                     TextFormField(
                       controller: _descriptionController,
-                      decoration:
-                          const InputDecoration(labelText: 'Description'),
+                      decoration: InputDecoration(
+                          labelText: R.string.addWorkOrderInputDescription),
                     ),
                     DropdownButtonFormField<String>(
                       value: _selectedPriority,
                       onChanged: (String? newValue) {
                         setState(() {
-                          _selectedPriority = newValue ?? 'High';
+                          _selectedPriority =
+                              newValue ?? R.string.addWorkOrderHighPriority;
                         });
                       },
-                      items: <String>['High', 'Medium', 'Low']
-                          .map<DropdownMenuItem<String>>((String value) {
+                      items: <String>[
+                        R.string.addWorkOrderHighPriority,
+                        R.string.addWorkOrderMediumPriority,
+                        R.string.addWorkOrderLowPriority
+                      ].map<DropdownMenuItem<String>>((String value) {
                         return DropdownMenuItem<String>(
                           value: value,
                           child: Text(value),
                         );
                       }).toList(),
-                      decoration: const InputDecoration(labelText: 'Priority'),
+                      decoration: InputDecoration(
+                          labelText: R.string.addWorkOrderInputPriority),
                     ),
                   ],
                 ),
@@ -233,7 +237,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
                       // Feche o modal
                       Navigator.of(context).pop();
                     },
-                    child: const Text('Save'),
+                    child: Text(R.string.save),
                   ),
                 ],
               );

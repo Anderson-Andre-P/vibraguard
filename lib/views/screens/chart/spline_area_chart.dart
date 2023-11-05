@@ -15,14 +15,13 @@ class SplineAreaChart extends StatelessWidget {
     ];
     return Scaffold(
         body: Center(
-            child: Container(
-                child: SfCartesianChart(series: <ChartSeries>[
+            child: SfCartesianChart(series: <ChartSeries>[
       // Renders spline chart
       SplineSeries<ChartData, int>(
           dataSource: chartData,
           xValueMapper: (ChartData data, _) => data.x,
           yValueMapper: (ChartData data, _) => data.y)
-    ]))));
+    ])));
   }
 }
 

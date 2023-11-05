@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 export 'assets/asset_model.dart';
 export 'assets/health_history_model.dart';
 export 'assets/metrics_model.dart';

@@ -1,7 +1,6 @@
-import 'package:vibraguard/core/formaters/captalizer_test_formater.dart';
-import 'package:vibraguard/core/formaters/uppercase_text_formater.dart';
+import 'package:get/get.dart';
 import 'package:vibraguard/core/helpers/images/image_paths.dart';
-import 'package:vibraguard/views/screens/assets/assets_screen.dart';
+import 'package:vibraguard/views/screens/auth/sign_in_screen.dart';
 import 'package:vibraguard/views/shared/components/button_primary.dart';
 import '../../core/helpers/resources.dart';
 import '../../model/onboarding/onboarding_model.dart';
@@ -68,33 +67,24 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           children: [
                             CustomPageOnboardingWidget(
                               imagePath: ImagePaths.imageTorno01,
-                              title: UppercaseTextFormatter.formatToUppercase(
-                                R.string.onboardingTitleOne,
-                              ),
-                              subtitle: CapitalizerTextFormatter
-                                  .capitalizeFirstLetter(
-                                R.string.onboardingSubtitleOne,
-                              ),
+                              title:
+                                  (R.string.onboardingTitleOne).toUpperCase(),
+                              subtitle:
+                                  (R.string.onboardingSubtitleOne).capitalize!,
                             ),
                             CustomPageOnboardingWidget(
                               imagePath: ImagePaths.imageTorno02,
-                              title: UppercaseTextFormatter.formatToUppercase(
-                                R.string.onboardingTitleTwo,
-                              ),
-                              subtitle: CapitalizerTextFormatter
-                                  .capitalizeFirstLetter(
-                                R.string.onboardingSubtitleTwo,
-                              ),
+                              title:
+                                  (R.string.onboardingTitleTwo).toUpperCase(),
+                              subtitle:
+                                  (R.string.onboardingSubtitleTwo).capitalize!,
                             ),
                             CustomPageOnboardingWidget(
                               imagePath: ImagePaths.imageTorno03,
-                              title: UppercaseTextFormatter.formatToUppercase(
-                                R.string.onboardingTitleThree,
-                              ),
-                              subtitle: CapitalizerTextFormatter
-                                  .capitalizeFirstLetter(
-                                R.string.onboardingSubtitleThree,
-                              ),
+                              title:
+                                  (R.string.onboardingTitleThree).toUpperCase(),
+                              subtitle: (R.string.onboardingSubtitleThree)
+                                  .capitalize!,
                             ),
                           ],
                         ),
@@ -143,19 +133,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (c) {
-                            // return const HomeScreen(
-                            //   id: 1,
-                            // );
-                            return const AssetsScreen(
-                              id: 1,
-                            );
+                            return const SignInScreen();
                           },
                         ),
                       );
                     },
-                    title: CapitalizerTextFormatter.capitalizeFirstLetter(
-                      R.string.toStart,
-                    ),
+                    title: (R.string.toStart).capitalize!,
                   ),
                 ),
               ],

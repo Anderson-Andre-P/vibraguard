@@ -35,7 +35,7 @@ class _AssetsScreenState extends State<AssetsScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Good Morning",
+              R.string.welcomeMessage,
               style: TextStyle(
                 color: R.colors.lightCommonTextColor,
                 fontFamily: R.fontFamily.primaryFont,
@@ -44,7 +44,7 @@ class _AssetsScreenState extends State<AssetsScreen> {
               ),
             ),
             Text(
-              "Anderson André",
+              R.string.randomName,
               style: TextStyle(
                 color: R.colors.lightTitleTextColor,
                 fontFamily: R.fontFamily.primaryFont,
@@ -72,17 +72,6 @@ class _AssetsScreenState extends State<AssetsScreen> {
             },
             icon: Icon(Icons.qr_code_scanner, color: R.colors.lightIconColor),
           ),
-          // Consumer<Mytheme>(
-          //   builder: (context, themeProvider, child) {
-          //     return IconButton(
-          //       onPressed: () {
-          //         themeProvider.switchTheme();
-          //       },
-          //       icon: Icon(Icons.lightbulb_outline,
-          //           color: R.colors.lightIconColor),
-          //     );
-          //   },
-          // )
         ],
       ),
       body: ChangeNotifierProvider(
@@ -95,7 +84,7 @@ class _AssetsScreenState extends State<AssetsScreen> {
                 child: SizedBoxWithCircularProgressIndicatorWidget(),
               );
             } else if (snapshot.hasError) {
-              return Text('Erro: ${snapshot.error}');
+              return Text('Error: ${snapshot.error}');
             } else if (snapshot.data == null) {
               return Text(R.string.itemNotFound);
             } else {
@@ -115,9 +104,9 @@ class _AssetsScreenState extends State<AssetsScreen> {
                           child: SizedBoxWithCircularProgressIndicatorWidget(),
                         );
                       } else if (snapshot.hasError) {
-                        return Text('Erro: ${snapshot.error}');
+                        return Text('Error: ${snapshot.error}');
                       } else if (snapshot.data == null) {
-                        return Text('Item não encontrado para ID: $index');
+                        return Text('Item not found for ID $index');
                       } else {
                         final assets = snapshot.data!;
 
