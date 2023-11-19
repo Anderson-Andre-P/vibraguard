@@ -32,6 +32,10 @@ Cor do badge: 3D7BF7
   <a href="https://github.com/Anderson-Andre-P" target="_blank">Author</a>
 </p>
 
+<p align="center">
+  <img align="center" src = "https://profile-counter.glitch.me/vibraguard/count.svg" alt ="Loading">
+</p>
+
 ## :link: Demo
 
 <details>
