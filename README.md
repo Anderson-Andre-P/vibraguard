@@ -24,6 +24,13 @@ Cor do badge: 3D7BF7
 </p>
 
 <p align="center">
+  <a href="https://www.figma.com/file/ASMDdAUXSnRKAo3ch6vPAQ/VibraGuard?type=design&node-id=1%3A2&mode=design&t=18IICEUM5IEuoqDM-1">
+    <img alt="Figma" src="https://img.shields.io/badge/-Design_no_Figma-3D7BF7?style=for-the-badge&logo=figma&logoColor=white&link=https://www.figma.com/file/ASMDdAUXSnRKAo3ch6vPAQ/VibraGuard?type=design&node-id=1%3A2&mode=design&t=18IICEUM5IEuoqDM-1" />
+  </a>
+<!--   ![Figma](https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white) -->
+</p>
+
+<p align="center">
   <a href="#dart-about">About</a> &#xa0; | &#xa0; 
   <a href="#rocket-technologies">Technologies</a> &#xa0; | &#xa0;
   <a href="#white_check_mark-how-to-contribute">How to Contribute</a> &#xa0; | &#xa0;
